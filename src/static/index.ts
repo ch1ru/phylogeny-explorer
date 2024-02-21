@@ -3,6 +3,7 @@ import { PhylogenyProps } from 'components/landingPage/Phylogeny';
 import { AboutProps } from 'components/landingPage/About';
 import { ContactProps } from 'components/landingPage/Contact';
 import { FooterProps } from 'components/landingPage/Footer';
+import { iconsContent } from './footer';
 
 const heroContent: HeroProps = {
   title: "Explore The Beauty of Evolution", 
@@ -32,7 +33,8 @@ const contactContent: ContactProps = {
 }
 
 const footerContent: FooterProps = {
-
+  copyright: "© Phylogeny Explorer Project 2021",
+  icons: iconsContent
 }
 
 const aboutContent: AboutProps = {

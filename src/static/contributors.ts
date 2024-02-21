@@ -3,6 +3,7 @@ import { ManagementProps} from 'components/contributorsPage/Management';
 import { DevTeamProps } from 'components/contributorsPage/DevTeam';
 import { FooterProps } from 'components/landingPage/Footer';
 import { ProfileProps } from 'components/contributorsPage/Profile';
+import { iconsContent } from './footer';
 
 const headerContent: HeaderProps = {
     title: "About the Phylogeny Explorer Project",
@@ -33,6 +34,11 @@ const managementContent: ManagementProps = {
     text: "",
     profiles: profileManagementContent
 }
+
+const footerContent: FooterProps = {
+    copyright: "© Phylogeny Explorer Project 2021",
+    icons: iconsContent
+  }
   
 const profileDevTeamContent: ProfileProps[] = [
 {
@@ -68,6 +74,9 @@ const devTeamContent: DevTeamProps = {
 
 export const contributorsContent = {
     content: { 
-      header: headerContent, footer: {}, devTeam: devTeamContent, management: managementContent
+      header: headerContent, 
+      footer: footerContent, 
+      devTeam: devTeamContent, 
+      management: managementContent
     }
 }
