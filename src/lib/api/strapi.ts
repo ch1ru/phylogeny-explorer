@@ -4,40 +4,48 @@ export function getStrapiURL(path = '') {
   return `https://content.phylogenyexplorerproject.co.uk${path}`;
 }
 
-// Helper to make GET requests to Strapi
-export async function fetchAPI(path: string) {
+const fetchAPI = async function (path: string) {
+  return new Promise<{id: number, attributes: any}>(async function (resolve, reject) {
+    try {
+      const requestUrl = getStrapiURL(`/api/${path}`);
+      const response = await fetch(requestUrl);
+      const { data }: Content = await response.json();
+      resolve(data)
+    } 
+    catch (e) {
+      console.log(e)
+      reject(Error("Couldn't fetch data from strapi"))
+    }
+  });
+};
+
+export function getStrapiMedia(data: MediaData) {
   try {
-    const requestUrl = getStrapiURL(`/api/${path}`);
-    const response = await fetch(requestUrl);
-    const { data }: Content = await response.json();
-    return {data: data};
+    const url = data.attributes.url;
+    return url.startsWith('/') ? getStrapiURL(url) : url;
   } catch (e) {
-    return {error: {e}};
+    console.error("Couldn't fetch media from Strapi")
   }
 }
 
-export function getStrapiMedia(data: MediaData) {
-  const url = data.attributes.url;
-  return url.startsWith('/') ? getStrapiURL(url) : url;
-}
-
 export async function getLandingPage() {
-  // const data = await fetchAPI(
-  //   `landing-page?populate=${encodeURIComponent(
-  //     [
-  //       'hero',
-  //       'hero.background',
-  //       'phylogeny',
-  //       'phylogeny.image',
-  //       'about',
-  //       'about.images',
-  //       'contact',
-  //       'footer',
-  //       'footer.icons',
-  //     ].toString()
-  //   )}`
-  // );
-  return {data: {}};
+  await fetchAPI(
+    `landing-page?populate=${encodeURIComponent(
+      [
+        'hero',
+        'hero.background',
+        'phylogeny',
+        'phylogeny.image',
+        'about',
+        'about.images',
+        'contact',
+        'footer',
+        'footer.icons',
+      ].toString()
+    )}`
+  )
+  .then((data) => { return data.attributes })
+  .catch((e: any) => { console.error(e) })
 }
 
 export async function getContributorsPage() {
@@ -64,11 +72,13 @@ export async function getContributorsPage() {
 }
 
 export async function getLoginPage() {
-  //const data = await fetchAPI('login-page?populate=background');
-  return {data: {}};
+  await fetchAPI('login-page?populate=background')
+  .then((data) => {return data.attributes})
+  .catch((e) => {console.error(e)})
 }
 
 export async function getSignupPage() {
-  //const data = await fetchAPI('signup-page?populate=background');
-  return {data: {}};
+  await fetchAPI('signup-page?populate=background')
+  .then((data) => {return data.attributes})
+  .catch((e) => {console.error(e)})
 }
