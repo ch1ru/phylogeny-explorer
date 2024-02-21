@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Auth } from 'aws-amplify';
 import { toast } from 'react-toastify';
+import backgroundImage from '../../public/images/background-signup.jpg';
 
 import { getSignupPage, getStrapiMedia } from 'lib/api/strapi';
 import { MediaItem } from 'lib/types';
@@ -84,7 +85,7 @@ const Signup = ({ background, successMessage, errorMessage }: Props) => {
   if (isLoadingUser || isLoggedIn) return null;
 
   return (
-    <Page backgroundImage={getStrapiMedia(background.data)}>
+    <Page backgroundImage={backgroundImage.src}>
       <Wrapper>
         <Header>
           <Heading>Sign up</Heading>

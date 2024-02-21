@@ -1,10 +1,10 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-import { getStrapiMedia } from 'lib/api/strapi';
 import { MediaItem } from 'lib/types';
 import useUser from 'lib/hooks/useUser';
 import { Wrapper, Title, Subtitle, LargeButton } from './Hero.styled';
+import backgroundImage from '../../../../public/images/barnacle.png';
 
 export interface Props {
   title: string;
@@ -17,12 +17,12 @@ const Hero = ({ title, subtitle, cta, background }: Props) => {
   const router = useRouter();
   const { isLoggedIn } = useUser();
   return (
-    <Wrapper backgroundUrl={getStrapiMedia(background.data)}>
-      <Title>{title}</Title>
-      <Subtitle>{subtitle}</Subtitle>
+    <Wrapper backgroundUrl={backgroundImage.src}>
+      <Title>Explore The Beauty of Evolution</Title>
+      <Subtitle>A navigable, online encyclopedia, of the entire evolutionary tree of life</Subtitle>
       <LargeButton
         onClick={() => router.push(isLoggedIn ? 'tree' : '/signup')}
-        text={cta}
+        text="Get started!"
       ></LargeButton>
     </Wrapper>
   );

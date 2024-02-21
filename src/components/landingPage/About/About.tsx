@@ -18,15 +18,13 @@ const About = ({ title, text, images }: Props) => (
     <HeadingXLarge>{title}</HeadingXLarge>
     <LargeText>{text}</LargeText>
     <Images>
-      {images.data.map(image => (
-        <Image
-          key={image.id}
-          src={getStrapiMedia(image)}
+      <Image
+          src="/images/feature_tree_info.png"
           alt=""
           width={1440}
           height={914}
         />
-      ))}
+      <Image src="/images/feature_wiki.png" alt="" width={1440} height={914} />
     </Images>
   </Section>
 );

@@ -6,10 +6,14 @@ export function getStrapiURL(path = '') {
 
 // Helper to make GET requests to Strapi
 export async function fetchAPI(path: string) {
-  const requestUrl = getStrapiURL(`/api/${path}`);
-  const response = await fetch(requestUrl);
-  const { data }: Content = await response.json();
-  return data;
+  try {
+    const requestUrl = getStrapiURL(`/api/${path}`);
+    const response = await fetch(requestUrl);
+    const { data }: Content = await response.json();
+    return {data: data};
+  } catch (e) {
+    return {error: {e}};
+  }
 }
 
 export function getStrapiMedia(data: MediaData) {
@@ -18,22 +22,22 @@ export function getStrapiMedia(data: MediaData) {
 }
 
 export async function getLandingPage() {
-  const data = await fetchAPI(
-    `landing-page?populate=${encodeURIComponent(
-      [
-        'hero',
-        'hero.background',
-        'phylogeny',
-        'phylogeny.image',
-        'about',
-        'about.images',
-        'contact',
-        'footer',
-        'footer.icons',
-      ].toString()
-    )}`
-  );
-  return data.attributes;
+  // const data = await fetchAPI(
+  //   `landing-page?populate=${encodeURIComponent(
+  //     [
+  //       'hero',
+  //       'hero.background',
+  //       'phylogeny',
+  //       'phylogeny.image',
+  //       'about',
+  //       'about.images',
+  //       'contact',
+  //       'footer',
+  //       'footer.icons',
+  //     ].toString()
+  //   )}`
+  // );
+  return {data: {}};
 }
 
 export async function getContributorsPage() {
@@ -60,11 +64,11 @@ export async function getContributorsPage() {
 }
 
 export async function getLoginPage() {
-  const data = await fetchAPI('login-page?populate=background');
-  return data.attributes;
+  //const data = await fetchAPI('login-page?populate=background');
+  return {data: {}};
 }
 
 export async function getSignupPage() {
-  const data = await fetchAPI('signup-page?populate=background');
-  return data.attributes;
+  //const data = await fetchAPI('signup-page?populate=background');
+  return {data: {}};
 }

@@ -26,7 +26,7 @@ interface Props {
 }
 
 const Home = ({ content }: Props) => (
-  <Page isDark>
+  <Page isDark >
     <Sections>
       <Hero {...content.hero} />
       <Phylogeny {...content.phylogeny} />

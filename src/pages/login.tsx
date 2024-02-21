@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Auth } from 'aws-amplify';
 import jwt from 'jsonwebtoken';
+import backgroundImage from '../../public/images/background-login.jpg';
 
 import { getLoginPage, getStrapiMedia } from 'lib/api/strapi';
 import { MediaItem } from 'lib/types';
@@ -79,7 +80,7 @@ const Login = ({ background, errorMessage, devErrorMessage }: Props) => {
   if (isLoadingUser || isLoggedIn) return null;
 
   return (
-    <Page backgroundImage={getStrapiMedia(background.data)}>
+    <Page backgroundImage={backgroundImage.src}>
       <Wrapper>
         <Header>
           <Heading>Log in</Heading>
